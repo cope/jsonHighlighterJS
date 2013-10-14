@@ -37,6 +37,10 @@
 
 <p>Therefore, all credit goes to <a href="http://stackoverflow.com/users/27862/pumbaa80">Pumbaa80</a>.</p>
 
+<p>Try it on <a href="http://jsfiddle.net/EVHKs/3/">jsfiddle</a>.<br><em>(fails in Chrome due to the "MIME type" error, but seems to work fine in FF 24)</em></p>
+
+<p>Usage:</p>
+
 <p>html:</p>
 
 <pre><code>&lt;head&gt;
@@ -75,9 +79,9 @@ out.html(cope.Highlight.highlight(jsonString); // jsonString is a valid JSON Str
 <pre><code>out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3}); // set indentation to 3 space characters
 </code></pre>
 
-<p>Tabs: (useTabs=true overrides indent)</p>
+<p>Tabs: (useTabs:true overrides indent)</p>
 
-<pre><code>out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3, useTabs=true}); // use tabs for indentation
+<pre><code>out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3, useTabs: true}); // use tabs for indentation
 </code></pre>
       </section>
       <footer>
