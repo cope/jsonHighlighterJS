@@ -7,6 +7,12 @@ Inspired by (read: stolen from) [Stackoverflow: JSON pretty print using JavaScri
 
 Therefore, all credit goes to [Pumbaa80](http://stackoverflow.com/users/27862/pumbaa80).
 
+Try it on [jsfiddle](http://jsfiddle.net/EVHKs/3/).  
+*(fails in Chrome due to the "MIME type" error, but seems to work fine in FF 24)*
+
+
+Usage:
+
 html:
 
     <head>
