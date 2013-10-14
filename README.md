@@ -3,8 +3,43 @@ jsonHighlight
 
 <b>JSON Highlight</b>
 
-Demo (usage) [jsfiddle](http://jsfiddle.net/EVHKs/2/).
-
 Inspired by (read: stolen from) [Stackoverflow: JSON pretty print using JavaScript](http://stackoverflow.com/a/7220510).
 
 Therefore, all credit goes to [Pumbaa80](http://stackoverflow.com/users/27862/pumbaa80).
+
+html:
+
+    <head>
+      ...
+      <script type="text/javascript" src="js/jsonHighlight.min.js"></script>
+    </head>
+    <body>
+      ...
+      <pre id="HighlightOutput"></pre>
+    </body>
+
+javascript:
+
+    var out = document.getElementById("out");
+    out.innerHTML = cope.Highlight.highlight(jsonObject); // jsonObject is a regular JS object
+    ...
+    out.innerHTML = cope.Highlight.highlight(jsonString); // jsonString is a valid JSON String
+
+with jQuery:
+
+    var out = $("#out");
+    out.html(cope.Highlight.highlight(jsonObject); // jsonObject is a regular JS object
+    ...
+    out.html(cope.Highlight.highlight(jsonString); // jsonString is a valid JSON String
+
+Options (optional):
+* indent: indentation
+* useTabs: use tab delimiter
+
+Indent:
+
+    out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3}); // set indentation to 3 space characters
+
+Tabs: (useTabs=true overrides indent)
+
+    out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3, useTabs=true}); // use tabs for indentation
