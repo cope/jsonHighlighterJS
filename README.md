@@ -3,7 +3,7 @@ jsonHighlight
 
 <b>JSON Highlight</b>
 
-[Demo (usage)](http://cope.github.com/JSON-Highlight/) is coming soon...
+Demo (usage) [jsfiddle](http://jsfiddle.net/EVHKs/2/).
 
 Inspired by (read: stolen from) [Stackoverflow: JSON pretty print using JavaScript](http://stackoverflow.com/a/7220510).
 
