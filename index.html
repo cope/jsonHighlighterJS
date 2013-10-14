@@ -33,11 +33,52 @@
 
 <p><b>JSON Highlight</b></p>
 
-<p><a href="http://cope.github.com/JSON-Highlight/">Demo (usage)</a> is coming soon...</p>
-
 <p>Inspired by (read: stolen from) <a href="http://stackoverflow.com/a/7220510">Stackoverflow: JSON pretty print using JavaScript</a>.</p>
 
 <p>Therefore, all credit goes to <a href="http://stackoverflow.com/users/27862/pumbaa80">Pumbaa80</a>.</p>
+
+<p>html:</p>
+
+<pre><code>&lt;head&gt;
+  ...
+  &lt;script type="text/javascript" src="js/jsonHighlight.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  ...
+  &lt;pre id="HighlightOutput"&gt;&lt;/pre&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p>javascript:</p>
+
+<pre><code>var out = document.getElementById("out");
+out.innerHTML = cope.Highlight.highlight(jsonObject); // jsonObject is a regular JS object
+...
+out.innerHTML = cope.Highlight.highlight(jsonString); // jsonString is a valid JSON String
+</code></pre>
+
+<p>with jQuery:</p>
+
+<pre><code>var out = $("#out");
+out.html(cope.Highlight.highlight(jsonObject); // jsonObject is a regular JS object
+...
+out.html(cope.Highlight.highlight(jsonString); // jsonString is a valid JSON String
+</code></pre>
+
+<p>Options (optional):</p>
+
+<ul>
+<li>indent: indentation</li>
+<li>useTabs: use tab delimiter</li>
+</ul><p>Indent:</p>
+
+<pre><code>out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3}); // set indentation to 3 space characters
+</code></pre>
+
+<p>Tabs: (useTabs=true overrides indent)</p>
+
+<pre><code>out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3, useTabs=true}); // use tabs for indentation
+</code></pre>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/cope">cope</a></p>
