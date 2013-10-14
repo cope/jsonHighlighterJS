@@ -40,6 +40,6 @@ Indent:
 
     out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3}); // set indentation to 3 space characters
 
-Tabs: (useTabs=true overrides indent)
+Tabs: (useTabs:true overrides indent)
 
-    out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3, useTabs=true}); // use tabs for indentation
+    out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3, useTabs: true}); // use tabs for indentation
