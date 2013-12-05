@@ -1,7 +1,7 @@
-jsonHighlight
+jsonHighlightJS
 =============
 
-<b>JSON Highlight</b>
+<b>Javascript JSON Highlighter</b>
 
 Inspired by (read: stolen from) [Stackoverflow: JSON pretty print using JavaScript](http://stackoverflow.com/a/7220510).
 
