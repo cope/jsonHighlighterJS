@@ -1,4 +1,4 @@
-jsonHighlightJS
+jsonHighlighterJS
 =============
 
 <b>Javascript JSON Highlighter</b>
