@@ -10,15 +10,15 @@
  */
 
 cope = ("undefined" === typeof cope) ? {} : cope;
-cope.Highlight = ("undefined" === typeof cope.Highlight) ? {} : cope.Highlight;
+cope.Highlighter = ("undefined" === typeof cope.Highlighter) ? {} : cope.Highlighter;
 
-cope.Highlight.cssString = 'color: darkgreen;';
-cope.Highlight.cssNumber = 'color: darkorange;';
-cope.Highlight.cssBoolean = 'color: blue;';
-cope.Highlight.cssNull = 'color: magenta;';
-cope.Highlight.cssKey = 'color: red;';
+cope.Highlighter.cssString = 'color: darkgreen;';
+cope.Highlighter.cssNumber = 'color: darkorange;';
+cope.Highlighter.cssBoolean = 'color: blue;';
+cope.Highlighter.cssNull = 'color: magenta;';
+cope.Highlighter.cssKey = 'color: red;';
 
-cope.Highlight.highlight = function (aJSON, aOptions) {
+cope.Highlighter.highlight = function (aJSON, aOptions) {
 	var indent = 2, useTabs = false;
 	if(aOptions) {
 		if(aOptions.indent) {
@@ -36,17 +36,17 @@ cope.Highlight.highlight = function (aJSON, aOptions) {
 
 	aJSON = aJSON.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 	return aJSON.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (aMatch) {
-		var lStyle = cope.Highlight.cssNumber;
+		var lStyle = cope.Highlighter.cssNumber;
 		if (/^"/.test(aMatch)) {
 			if (/:$/.test(aMatch)) {
-				lStyle = cope.Highlight.cssKey;
+				lStyle = cope.Highlighter.cssKey;
 			} else {
-				lStyle = cope.Highlight.cssString;
+				lStyle = cope.Highlighter.cssString;
 			}
 		} else if (/true|false/.test(aMatch)) {
-			lStyle = cope.Highlight.cssBoolean;
+			lStyle = cope.Highlighter.cssBoolean;
 		} else if (/null/.test(aMatch)) {
-			lStyle = cope.Highlight.cssNull;
+			lStyle = cope.Highlighter.cssNull;
 		}
 		return '<span style="' + lStyle + '">' + aMatch + '</span>';
 	});
