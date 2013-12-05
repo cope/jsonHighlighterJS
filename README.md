@@ -17,7 +17,7 @@ html:
 
     <head>
       ...
-      <script type="text/javascript" src="js/jsonHighlight.min.js"></script>
+      <script type="text/javascript" src="js/jsonHighlighter.min.js"></script>
     </head>
     <body>
       ...
