@@ -27,16 +27,16 @@ html:
 javascript:
 
     var out = document.getElementById("out");
-    out.innerHTML = cope.Highlight.highlight(jsonObject); // jsonObject is a regular JS object
+    out.innerHTML = cope.Highlighter.highlight(jsonObject); // jsonObject is a regular JS object
     ...
-    out.innerHTML = cope.Highlight.highlight(jsonString); // jsonString is a valid JSON String
+    out.innerHTML = cope.Highlighter.highlight(jsonString); // jsonString is a valid JSON String
 
 with jQuery:
 
     var out = $("#out");
-    out.html(cope.Highlight.highlight(jsonObject); // jsonObject is a regular JS object
+    out.html(cope.Highlighter.highlight(jsonObject); // jsonObject is a regular JS object
     ...
-    out.html(cope.Highlight.highlight(jsonString); // jsonString is a valid JSON String
+    out.html(cope.Highlighter.highlight(jsonString); // jsonString is a valid JSON String
 
 Options (optional):
 * indent: indentation
@@ -44,8 +44,8 @@ Options (optional):
 
 Indent:
 
-    out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3}); // set indentation to 3 space characters
+    out.innerHTML = cope.Highlighter.highlight(jsonObject, {indent: 3}); // set indentation to 3 space characters
 
 Tabs: (useTabs:true overrides indent)
 
-    out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3, useTabs: true}); // use tabs for indentation
+    out.innerHTML = cope.Highlighter.highlight(jsonObject, {indent: 3, useTabs: true}); // use tabs for indentation
