@@ -56,17 +56,17 @@
 <p>javascript:</p>
 
 <pre><code>var out = document.getElementById("out");
-out.innerHTML = cope.Highlight.highlight(jsonObject); // jsonObject is a regular JS object
+out.innerHTML = cope.Highlighter.highlight(jsonObject); // jsonObject is a regular JS object
 ...
-out.innerHTML = cope.Highlight.highlight(jsonString); // jsonString is a valid JSON String
+out.innerHTML = cope.Highlighter.highlight(jsonString); // jsonString is a valid JSON String
 </code></pre>
 
 <p>with jQuery:</p>
 
 <pre><code>var out = $("#out");
-out.html(cope.Highlight.highlight(jsonObject); // jsonObject is a regular JS object
+out.html(cope.Highlighter.highlight(jsonObject); // jsonObject is a regular JS object
 ...
-out.html(cope.Highlight.highlight(jsonString); // jsonString is a valid JSON String
+out.html(cope.Highlighter.highlight(jsonString); // jsonString is a valid JSON String
 </code></pre>
 
 <p>Options (optional):</p>
@@ -76,12 +76,12 @@ out.html(cope.Highlight.highlight(jsonString); // jsonString is a valid JSON Str
 <li>useTabs: use tab delimiter</li>
 </ul><p>Indent:</p>
 
-<pre><code>out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3}); // set indentation to 3 space characters
+<pre><code>out.innerHTML = cope.Highlighter.highlight(jsonObject, {indent: 3}); // set indentation to 3 space characters
 </code></pre>
 
 <p>Tabs: (useTabs:true overrides indent)</p>
 
-<pre><code>out.innerHTML = cope.Highlight.highlight(jsonObject, {indent: 3, useTabs: true}); // use tabs for indentation
+<pre><code>out.innerHTML = cope.Highlighter.highlight(jsonObject, {indent: 3, useTabs: true}); // use tabs for indentation
 </code></pre>
       </section>
       <footer>
