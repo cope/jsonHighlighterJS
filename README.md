@@ -26,14 +26,14 @@ html:
 
 javascript:
 
-    var out = document.getElementById("out");
+    var out = document.getElementById("HighlightOutput");
     out.innerHTML = cope.Highlighter.highlight(jsonObject); // jsonObject is a regular JS object
     ...
     out.innerHTML = cope.Highlighter.highlight(jsonString); // jsonString is a valid JSON String
 
 with jQuery:
 
-    var out = $("#out");
+    var out = $("#HighlightOutput");
     out.html(cope.Highlighter.highlight(jsonObject); // jsonObject is a regular JS object
     ...
     out.html(cope.Highlighter.highlight(jsonString); // jsonString is a valid JSON String
