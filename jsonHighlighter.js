@@ -10,14 +10,15 @@
  *
  */
 
-var cope = {};
-cope.Highlighter = ("undefined" === typeof cope.Highlighter) ? {} : cope.Highlighter;
-
-cope.Highlighter.cssString = "color: darkgreen;";
-cope.Highlighter.cssNumber = "color: darkorange;";
-cope.Highlighter.cssBoolean = "color: blue;";
-cope.Highlighter.cssNull = "color: magenta;";
-cope.Highlighter.cssKey = "color: red;";
+var cope = {
+	Highlighter: {
+		cssString: "color: darkgreen;",
+		cssNumber: "color: darkorange;",
+		cssBoolean: "color: blue;",
+		cssNull: "color: magenta;",
+		cssKey: "color: red;"
+	}
+};
 
 cope.Highlighter.highlight = function (json, options) {
 	var indent = 2, tabs = false;
@@ -25,8 +26,8 @@ cope.Highlighter.highlight = function (json, options) {
 		if (options.indent) indent = options.indent;
 		if (options.useTabs) tabs = options.useTabs;
 	}
-	if (typeof json != "string") json = JSON.stringify(json, undefined, (tabs === true ? "\t" : indent));
-	else json = JSON.stringify(JSON.parse(json), undefined, (tabs === true ? "\t" : indent));
+	if (typeof json != "string") json = JSON.stringify(json, null, (tabs === true ? "\t" : indent));
+	else json = JSON.stringify(JSON.parse(json), null, (tabs === true ? "\t" : indent));
 
 	json = json.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 	return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
