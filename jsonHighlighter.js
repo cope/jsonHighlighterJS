@@ -10,45 +10,34 @@
  *
  */
 
-cope = ("undefined" === typeof cope) ? {} : cope;
+var cope = {};
 cope.Highlighter = ("undefined" === typeof cope.Highlighter) ? {} : cope.Highlighter;
 
-cope.Highlighter.cssString = 'color: darkgreen;';
-cope.Highlighter.cssNumber = 'color: darkorange;';
-cope.Highlighter.cssBoolean = 'color: blue;';
-cope.Highlighter.cssNull = 'color: magenta;';
-cope.Highlighter.cssKey = 'color: red;';
+cope.Highlighter.cssString = "color: darkgreen;";
+cope.Highlighter.cssNumber = "color: darkorange;";
+cope.Highlighter.cssBoolean = "color: blue;";
+cope.Highlighter.cssNull = "color: magenta;";
+cope.Highlighter.cssKey = "color: red;";
 
-cope.Highlighter.highlight = function (aJSON, aOptions) {
-	var indent = 2, useTabs = false;
-	if(aOptions) {
-		if(aOptions.indent) {
-			indent = aOptions.indent;
-		}
-		if(aOptions.useTabs) {
-			useTabs = aOptions.useTabs;
-		}
+cope.Highlighter.highlight = function (json, options) {
+	var indent = 2, tabs = false;
+	if (options) {
+		if (options.indent) indent = options.indent;
+		if (options.useTabs) tabs = options.useTabs;
 	}
-	if (typeof aJSON != 'string') {
-		aJSON = JSON.stringify(aJSON, undefined, (useTabs === true ? "\t" : indent));
-	} else {
-		aJSON = JSON.stringify(JSON.parse(aJSON), undefined, (useTabs === true ? "\t" : indent));
-	}
+	if (typeof json != "string") json = JSON.stringify(json, undefined, (tabs === true ? "\t" : indent));
+	else json = JSON.stringify(JSON.parse(json), undefined, (tabs === true ? "\t" : indent));
 
-	aJSON = aJSON.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-	return aJSON.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (aMatch) {
-		var lStyle = cope.Highlighter.cssNumber;
-		if (/^"/.test(aMatch)) {
-			if (/:$/.test(aMatch)) {
-				lStyle = cope.Highlighter.cssKey;
-			} else {
-				lStyle = cope.Highlighter.cssString;
-			}
-		} else if (/true|false/.test(aMatch)) {
-			lStyle = cope.Highlighter.cssBoolean;
-		} else if (/null/.test(aMatch)) {
-			lStyle = cope.Highlighter.cssNull;
+	json = json.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+	return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+		var style = cope.Highlighter.cssNumber;
+		if (/^"/.test(match)) {
+			if (/:$/.test(match)) style = cope.Highlighter.cssKey;
+			else style = cope.Highlighter.cssString;
 		}
-		return '<span style="' + lStyle + '">' + aMatch + '</span>';
+		else if (/true|false/.test(match)) style = cope.Highlighter.cssBoolean;
+		else if (/null/.test(match)) style = cope.Highlighter.cssNull;
+
+		return "<span style=\"" + style + "\">" + match + "</span>";
 	});
 };
