@@ -20,39 +20,51 @@ var cope = {
 	}
 };
 
+cope.Highlighter.match = function (match) {
+	var style = cope.Highlighter.cssNumber;
+
+	var styles = [
+		{test: /true|false/.test(match), style: cope.Highlighter.cssBoolean},
+		{test: /null/.test(match), style: cope.Highlighter.cssNull},
+		{test: /^"/.test(match) && /:$/.test(match), style: cope.Highlighter.cssKey},
+		{test: /^"/.test(match) && !(/:$/.test(match)), style: cope.Highlighter.cssString}
+	];
+
+	for (var s of styles) {
+		if (s.test === true) {
+			style = s.style;
+			break;
+		}
+	}
+
+	// if (/^"/.test(match)) {
+	// 	if (/:$/.test(match)) style = cope.Highlighter.cssKey;
+	// 	else style = cope.Highlighter.cssString;
+	// }
+	// else if (/true|false/.test(match)) style = cope.Highlighter.cssBoolean;
+	// else if (/null/.test(match)) style = cope.Highlighter.cssNull;
+
+	return "<span style=\"" + style + "\">" + match + "</span>";
+};
+
+cope.Highlighter.fixOptions = function (options) {
+	if (!options.indent) options.indent = 2;
+	options.useTabs = true === options.useTabs;
+	return options;
+};
+
+cope.Highlighter.fixJSON = function (json) {
+	return (typeof json === "string") ? JSON.parse(json) : json;
+};
+
 cope.Highlighter.highlight = function (json, options) {
-	var indent = options.indent || 2,
-		tabs = true === options.useTabs;
+	json = cope.Highlighter.fixJSON(json);
+	options = cope.Highlighter.fixOptions(options);
 
-	if (typeof json !== "string") json = JSON.stringify(json, null, (tabs === true ? "\t" : indent));
-	else json = JSON.stringify(JSON.parse(json), null, (tabs === true ? "\t" : indent));
+	var tabs = options.useTabs;
+	var indent = options.indent;
 
+	json = JSON.stringify(json, null, (tabs === true ? "\t" : indent));
 	json = json.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-	return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
-		function (match) {
-			var style = cope.Highlighter.cssNumber;
-
-			var styles = [
-				{test: /true|false/.test(match), style: cope.Highlighter.cssBoolean},
-				{test: /null/.test(match), style: cope.Highlighter.cssNull},
-				{test: /^"/.test(match) && /:$/.test(match), style: cope.Highlighter.cssKey},
-				{test: /^"/.test(match) && !(/:$/.test(match)), style: cope.Highlighter.cssString}
-			];
-
-			for (var s of styles) {
-				if (s.test === true) {
-					style = s.style;
-					break;
-				}
-			}
-
-			// if (/^"/.test(match)) {
-			// 	if (/:$/.test(match)) style = cope.Highlighter.cssKey;
-			// 	else style = cope.Highlighter.cssString;
-			// }
-			// else if (/true|false/.test(match)) style = cope.Highlighter.cssBoolean;
-			// else if (/null/.test(match)) style = cope.Highlighter.cssNull;
-
-			return "<span style=\"" + style + "\">" + match + "</span>";
-		});
+	return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, cope.Highlighter.match);
 };
