@@ -20,35 +20,26 @@ var cope = {
 	}
 };
 
-cope.Highlighter.match = function (match) {
-	var style = cope.Highlighter.cssNumber;
+cope.Highlighter.convertCssStyle = function (reg) {
+	return /:$/.test(reg) ? cope.Highlighter.cssKey : cope.Highlighter.cssString;
+};
 
-	var styles = [
-		{test: /true|false/.test(match), style: cope.Highlighter.cssBoolean},
-		{test: /null/.test(match), style: cope.Highlighter.cssNull},
-		{test: /^"/.test(match) && /:$/.test(match), style: cope.Highlighter.cssKey},
-		{test: /^"/.test(match) && !(/:$/.test(match)), style: cope.Highlighter.cssString}
-	];
+cope.Highlighter.convertNonCssStyle = function (reg) {
+	if (/true|false/.test(reg)) return cope.Highlighter.cssBoolean;
+	if (/null/.test(reg)) return cope.Highlighter.cssNull;
+	return cope.Highlighter.cssNumber;
+};
 
-	for (var s of styles) {
-		if (s.test === true) {
-			style = s.style;
-			break;
-		}
-	}
+cope.Highlighter.convertStyle = function (reg) {
+	return /^"/.test(reg) ? cope.Highlighter.convertCssStyle(reg) : cope.Highlighter.convertNonCssStyle(reg);
+};
 
-	// if (/^"/.test(match)) {
-	// 	if (/:$/.test(match)) style = cope.Highlighter.cssKey;
-	// 	else style = cope.Highlighter.cssString;
-	// }
-	// else if (/true|false/.test(match)) style = cope.Highlighter.cssBoolean;
-	// else if (/null/.test(match)) style = cope.Highlighter.cssNull;
-
-	return "<span style=\"" + style + "\">" + match + "</span>";
+cope.Highlighter.match = function (reg) {
+	return "<span style=\"" + cope.Highlighter.convertStyle(reg) + "\">" + reg + "</span>";
 };
 
 cope.Highlighter.fixOptions = function (options) {
-	if (!options.indent) options.indent = 2;
+	options.indent = options.indent || 2;
 	options.useTabs = true === options.useTabs;
 	return options;
 };
