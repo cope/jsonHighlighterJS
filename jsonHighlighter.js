@@ -31,12 +31,27 @@ cope.Highlighter.highlight = function (json, options) {
 	return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
 		function (match) {
 			var style = cope.Highlighter.cssNumber;
-			if (/^"/.test(match)) {
-				if (/:$/.test(match)) style = cope.Highlighter.cssKey;
-				else style = cope.Highlighter.cssString;
+
+			var styles = [
+				{test: /true|false/.test(match), style: cope.Highlighter.cssBoolean},
+				{test: /null/.test(match), style: cope.Highlighter.cssNull},
+				{test: /^"/.test(match) && /:$/.test(match), style: cope.Highlighter.cssKey},
+				{test: /^"/.test(match) && !(/:$/.test(match)), style: cope.Highlighter.cssString}
+			];
+
+			for (var s of styles) {
+				if (s.test === true) {
+					style = s.style;
+					break;
+				}
 			}
-			else if (/true|false/.test(match)) style = cope.Highlighter.cssBoolean;
-			else if (/null/.test(match)) style = cope.Highlighter.cssNull;
+
+			// if (/^"/.test(match)) {
+			// 	if (/:$/.test(match)) style = cope.Highlighter.cssKey;
+			// 	else style = cope.Highlighter.cssString;
+			// }
+			// else if (/true|false/.test(match)) style = cope.Highlighter.cssBoolean;
+			// else if (/null/.test(match)) style = cope.Highlighter.cssNull;
 
 			return "<span style=\"" + style + "\">" + match + "</span>";
 		});
